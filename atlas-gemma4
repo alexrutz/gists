@@ -2,8 +2,11 @@
 set -e
 
 cd /workspace
-git clone https://github.com/alexrutz/atlas-cag
+[ -d atlas-cag/.git ] || git clone https://github.com/alexrutz/atlas-cag
+mkdir -p /workspace/atlas-cag/data/models
 cd /workspace/atlas-cag/data/models
-wget --content-disposition "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-UD-Q4_K_XL.gguf?download=true"
-wget --content-disposition "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/mmproj-BF16.gguf?download=true"
-wget --content-disposition "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/mtp-gemma-4-E4B-it.gguf?download=true"
+
+BASE="https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main"
+for f in gemma-4-E4B-it-UD-Q4_K_XL.gguf mmproj-BF16.gguf mtp-gemma-4-E4B-it.gguf; do
+  wget -nc -O "$f" "$BASE/$f?download=true" || { rm -f "$f"; exit 1; }
+done
