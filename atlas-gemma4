@@ -12,4 +12,4 @@ for f in gemma-4-E4B-it-UD-Q4_K_XL.gguf mmproj-BF16.gguf mtp-gemma-4-E4B-it.gguf
 done
 cd /workspace/atlas-cag
 uv sync
-.venv/bin/python -m atlas --host 0.0.0.0 --port 12345
+.venv/bin/python -m atlas --host 0.0.0.0 --port 10000
