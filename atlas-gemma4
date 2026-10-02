@@ -10,3 +10,6 @@ BASE="https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main"
 for f in gemma-4-E4B-it-UD-Q4_K_XL.gguf mmproj-BF16.gguf mtp-gemma-4-E4B-it.gguf; do
   wget -nc -O "$f" "$BASE/$f?download=true" || { rm -f "$f"; exit 1; }
 done
+cd /workspace/atlas-cag
+uv sync
+.venv/bin/python -m atlas --host 0.0.0.0 --port 80000
